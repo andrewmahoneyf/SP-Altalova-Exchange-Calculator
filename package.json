@@ -1,7 +1,7 @@
 {
-  "name": "PT Altalova Exchange Calculator",
+  "name": "SP Altalova Exchange Calculator",
   "author": "Andrew Mahoney-Fernandes",
-  "homepage": "https://andrewmahoneyf.github.io/PT-Altalova-Exchange-Calculator/",
+  "homepage": "https://andrewmahoneyf.github.io/SP-Altalova-Exchange-Calculator/",
   "version": "0.1.0",
   },
   "dependencies": {
