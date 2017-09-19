@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Andrew Mahoney-Fernandes">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M"
+        crossorigin="anonymous" />
+    <link rel="stylesheet" href="src/app.css" />
+
+    <title>Altalova Calculator</title>
+
+</head>
+
+<body>
+
+    <div class="form-box">
+        <div class="page-header">
+            <h2>Comparação de Transferência</h2>
+        </div>
+
+        <form>
+            <div class="row countries">
+                <div class="form-group float-left col-lg-5">
+                    <label for="origin">Enviando de:</label>
+                    <select class="form-control" id="origin" disabled>
+                        <option>Brasil (BRL)</option>
+                        <option>EUA (USD)</option>
+                    </select>
+                </div>
+                <img src="images/swap.png" alt="Swap" id="swap" class="wiggle">
+                <div class="form-group float-right col-lg-5">
+                    <label for="recipient">Enviando para:</label>
+                    <select class="form-control" id="recipient" disabled>
+                        <option>EUA (USD)</option>
+                        <option>Brasil (BRL)</option>
+                    </select>
+                </div>
+                <br style="clear:both" />
+            </div>
+
+            <div class="form-group form-inline fixrow">
+                <label class="sr-only" for="amount">Valor (em dólares)</label>
+                <div class="input-group">
+                    <select class="form-control col-lg-3" id="transaction">
+                        <option>enviar</option>
+                        <option>receber</option>
+                    </select>
+                    <div class="input-group-addon" id="symbol">R$</div>
+                    <input type="number" min="0" class="form-control col-lg-4" id="amount" placeholder="Valor" />
+                    <div class="input-group-addon" id="fraction">,00</div>
+                    <div class="input-group-addon" id="currency">BRL</div>
+                </div>
+            </div>
+            <div id="root"></div>
+            <div id="buy" class="invisible"></div>
+            <div id="sell" class="invisible"></div>
+            <table class='table table-bordered' id="table">
+                <thead>
+                    <tr id="thead">
+                        <th id="th">Taxa de câmbio (PTAX)</th>
+                        <td id="td"></td>
+                    </tr>
+                </thead>
+                <tbody id="tbody" class="invisible">
+                    <tr id="bred">
+                        <th>Bancos<br><i>*Taxa de câmbio: <span id="banksHead"></span></i></th>
+                        <td id="banks"></td>
+                    </tr>
+                    <tr id="tred">
+                        <th>Serviços Tradicionais<br><i>*Taxa de câmbio: <span id="mgHead"></span></i></th>
+                        <td id="mg"></td>
+                    </tr>
+                    <tr>
+                        <th>Serviços Online<div id="onlineHead"></div></th>
+                        <td id="online"></td>
+                    </tr>
+                    <tr style="background-color: rgba(0, 255, 0, 0.1);">
+                        <th><img src="images/altalova.png" alt="Altalova Logo" id="logo"><br><i>*Melhor Taxa de câmbio: <span id="altalovaHead"></span></i></th>
+                        <td id="altalova"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div id="difference" style="text-align: center;">*Esses cálculos são destinados apenas para visualização e portanto as estimativas não podem ser garantidas</div>
+        </form>
+    </div>
+
+    <script type="text/javascript" src="src/script.js"></script>
+
+</body>
+
+</html>
