@@ -46,7 +46,7 @@ function outputScript() {
     var amount = document.getElementById("amount").value;
     var currency = document.getElementById("currency").innerHTML;
     var fraction = document.getElementById("fraction").innerHTML;
-    if (recipient == "EUA"){
+    if (recipient == "EE.UU."){
         var flag = "<img src='images/USflag.png' alt='US flag' id='flag'>";
         var altflag= "<img src='images/BRflag.png' alt='US flag' id='flag'>";
     } else {
@@ -54,32 +54,22 @@ function outputScript() {
         var altflag= "<img src='images/USflag.png' alt='US flag' id='flag'>";
     }
     if (transaction == "enviar") {
-        if (recipient == "Brasil"){
-            var article = "o ";
-        } else {
-            var article = "os ";
-        }
-        var phrase = "Quantidade recebida do envio " + amount + " " + currency + " para " + article + flag + ":";
+        var phrase = "Cantidad recibida de enviar " + amount + " " + currency + " a " + flag + ":";
     } else {
-        if (recipient == "Brasil"){
-            var article = " dos ";
-        } else {
-            var article = " do ";
-        }
-        var phrase = "Custo para receber " + amount + " " + currency + article + altflag + ":";
+        var phrase = "Costo para recibir " + amount + " " + currency + " de " + altflag + ":";
     }
 
     document.getElementById("tbody").classList.add("invisible");
     document.getElementById("thead").classList.add("invisible");
     document.getElementById("difference").classList.add("invisible");
     if (!amount) {
-        output.innerHTML = "Por favor insira um valor!";
+        output.innerHTML = "Por favor ingrese una cantidad!";
     } else if (amount < 1) {
-        output.innerHTML = "Por favor insira um valor acima de 1 dólar.";
+        output.innerHTML = "Introduzca una cantidad superior a 1 dólar.";
     } else if (amount >= 5000 && currency == "USD") {
-        output.innerHTML = "Insira um valor inferior a US $ 5,000";
+        output.innerHTML = "Por favor ingrese una cantidad menor de $5,000";
     } else if (amount >= 20000 && currency == "BRL") {
-        output.innerHTML = "Por favor insira um valor inferior a R $ 20.000";
+        output.innerHTML = "Por favor ingrese una cantidad menor de R$20.000";
     } else {
         output.innerHTML = phrase;
         var ptax = getNum(recipient);
@@ -92,7 +82,7 @@ function outputScript() {
 // helper funtion to get correct ptax 
 function getNum(recipient) {
     var num = 0.0;
-    if (recipient == "EUA") {
+    if (recipient == "EE.UU.") {
         num = parseFloat(document.getElementById('buy').innerHTML);
         num = num / 10;
     } else {
@@ -137,30 +127,30 @@ function tableBody(ptax, recipient, transaction) {
         var bankCost = "$" + bankTotal;
         var mg = "R$" + toBRL(twoDecimal(amount * mgRate));
         var mgCost = "$" + mgTotal;
-        var online = "<div style='font-size: 23px'>Serviço não oferecido</div>";
+        var online = "<div style='font-size: 23px'>Servicio no ofrecido</div>";
         var altalova = "R$" + toBRL(twoDecimal(amount * ptax));
         var altalovaCost = "$" + altalovaTotal;
-    } else if (recipient == "EUA" && transaction == "enviar") {
+    } else if (recipient == "EE.UU." && transaction == "enviar") {
         var bank = "$" + twoDecimal(amount/ (bankRate * 10));
         var bankCost = "R$" + toBRL(bankTotal);
         var mg = "$" + twoDecimal(amount/ (mgRate * 10));
         var mgCost = "R$" + toBRL(mgTotal);
-        var online = "<div style='font-size: 23px'>Limite de transferência atingido</div>";
+        var online = "<div style='font-size: 23px'>Límite de transferencia alcanzado</div>";
         if (amount < 10000) {
             var online = "$" + twoDecimal(amount/ (onlineRate * 10));
             var onlineCost = "R$" + toBRL(mgTotal);
         }
         var altalova = "$" + twoDecimal(amount/ (ptax * 10));
         var altalovaCost = "R$" + toBRL(altalovaTotal);
-    } else if (recipient == "Brasil" && transaction == "receber") {
+    } else if (recipient == "Brasil" && transaction == "recibir") {
         var bank = "$" + twoDecimal((amount/ bankRate) + bankFee);
         var mg = "$" + twoDecimal((amount/ mgRate) + mgFee);
-        var online = "<div style='font-size: 23px'>Serviço não oferecido</div>";
+        var online = "<div style='font-size: 23px'>Servicio no ofrecido</div>";
         var altalova = "$" + twoDecimal((amount/ ptax) * ourSpread);
     } else {
         var bank = "R$" + toBRL(twoDecimal((amount * (bankRate * 10) + (bankFee * ptax))));
         var mg = "R$" + toBRL(twoDecimal((amount * (mgRate * 10) + (mgFee * ptax))));
-        var online = "<div style='font-size: 23px'>Limite de transferência atingido</div>";
+        var online = "<div style='font-size: 23px'>Límite de transferencia alcanzado</div>";
         if (amount < 3000) {
             var online = "R$" + toBRL(twoDecimal(((amount * (onlineRate * 10)) + 62.10)));
         }    
@@ -168,21 +158,21 @@ function tableBody(ptax, recipient, transaction) {
     }
 
     if (transaction == "enviar") {
-        document.getElementById("banksHead").innerHTML = bankRate + "<br>Custo Total: " + bankCost;
-        document.getElementById("mgHead").innerHTML = mgRate + "<br>Custo Total: " + mgCost;
-        if (recipient == "EUA" && amount < 10000){
-            document.getElementById("onlineHead").innerHTML = "<i>*Taxa de câmbio: " + onlineRate + "<br>Custo Total: " + onlineCost + "</i>";
+        document.getElementById("banksHead").innerHTML = bankRate + "<br>Coste Total: " + bankCost;
+        document.getElementById("mgHead").innerHTML = mgRate + "<br>Coste Total: " + mgCost;
+        if (recipient == "EE.UU." && amount < 10000){
+            document.getElementById("onlineHead").innerHTML = "<i>*Tipo de cambio: " + onlineRate + "<br>Coste Total: " + onlineCost + "</i>";
         } else {
-            document.getElementById("onlineHead").innerHTML = "<i>*Taxa de câmbio não disponível</i>";
+            document.getElementById("onlineHead").innerHTML = "<i>*Tipo de cambio no disponible</i>";
         }
-        document.getElementById("altalovaHead").innerHTML = ptax + "<br>Menor Custo: " + altalovaCost;
+        document.getElementById("altalovaHead").innerHTML = ptax + "<br>Mejor Coste: " + altalovaCost;
     } else {
         document.getElementById("banksHead").innerHTML = bankRate
         document.getElementById("mgHead").innerHTML = mgRate;
-        if (recipient == "EUA" && amount < 3000){
-            document.getElementById("onlineHead").innerHTML = "<i>*Taxa de câmbio: " + onlineRate + "</i>";
+        if (recipient == "EE.UU." && amount < 3000){
+            document.getElementById("onlineHead").innerHTML = "<i>*Tipo de cambio: " + onlineRate + "</i>";
         } else {
-            document.getElementById("onlineHead").innerHTML = "<i>*Taxa de câmbio não disponível</i>";
+            document.getElementById("onlineHead").innerHTML = "<i>*Tipo de cambio no disponible</i>";
         }
         document.getElementById("altalovaHead").innerHTML = ptax;
     }
@@ -283,7 +273,7 @@ function getDifference(recipient, transaction) {
         if (currency == "R$") {
             extra = toBRL(extra); 
         }
-        document.getElementById("difference").innerHTML = "*Quantidade Extra Recebida= <b style='font-size: larger;'>" + currency + extra + "</b>";                
+        document.getElementById("difference").innerHTML = "*Cantidad Adicional Recibida= <b style='font-size: larger;'>" + currency + extra + "</b>";                
         document.getElementById("difference").classList.remove("invisible");
     } else {
         var high = bank;
@@ -298,7 +288,7 @@ function getDifference(recipient, transaction) {
             if (currency == "R$") {
                 saved = toBRL(saved); 
             }
-            document.getElementById("difference").innerHTML = "*Valor Total Economizado= <b style='font-size: larger;'>" + currency + saved + "</b>";                
+            document.getElementById("difference").innerHTML = "*Cantidad Total Guardada= <b style='font-size: larger;'>" + currency + saved + "</b>";                
             document.getElementById("difference").classList.remove("invisible");
         }
     }
